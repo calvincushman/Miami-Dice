@@ -8,7 +8,7 @@
     <title>Pig Dice</title>
   </head>
   <body>
-    <div class="container">
+    <div class="container-fluid">
       <!-- form page -->
       <form id="entry" action="index.html" method="post">
         <div class="form-group">
@@ -37,9 +37,36 @@
         <button type="submit" class="btn btn-primary">Let's Play!</button>
       </form>
 
-      <!-- scoreboard -->
-
       <!-- game -->
-    </div>
+      <div class="initially-hidden">
+
+        <h1><span id="currentPlayer"></span></h1>
+        <!-- scoreboard -->
+        <h4><span id="player1name"></span>: <span id="player1score"></span></h4>
+        <h4><span id="player2name"></span>: <span id="player2score"></span></h4>
+        <!-- roll display -->
+        <div class="result-div">
+          <p id="result-display">
+
+          </p>
+        </div>
+        <!-- play options and turnscore -->
+        <div class="row">
+          <div class="col-sm-4">
+            <button type="button" id="hit" class="play-button">Roll</button>
+          </div>
+          <div class="col-sm-4">
+            <div class="turnscore-div">
+              <p id="turnscore-display">
+
+              </p>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <button type="button" id="hold" class="play-button">Hold</button>
+          </div>
+        </div>
+      </div><!-- end of game -->
+    </div><!-- end of container -->
   </body>
 </html>
