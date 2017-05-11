@@ -127,10 +127,20 @@ h2 {
   width: 375px;
 }
 
-#header {
+h6 {
   float:right;
   font-size: 150px;
   color: #e62aaf;
   text-shadow: 20px 20px 50px #04c8d6;
   font-family: Outrun future;
+}
+
+.winScreen img {
+  min-width: 50%;
+  height: auto;
+  margin-bottom: 1200px;
+  margin-left: 15%;
+  border: 20px solid white;
+  border-radius: 20px;
+  margin-top: 20px;
 }
