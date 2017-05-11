@@ -3,14 +3,16 @@
 /////////////////////////////////////////////////
 
 // constructors
-function Game (turn, playTo) {
+function Game (turn, playTo, turnScore) {
   this.turn = turn;
   this.playTo = playTo;
+  this.turnScore = turnScore;
 }
 
-function Player (name, score) {
+function Player (name, score, playerTurnScore) {
   this.name = name;
   this.score = score;
+  this.playerTurnScore = playerTurnScore;
 
 }
 
@@ -31,11 +33,20 @@ Game.prototype.passTurn = function () {
   }
 }
 
-Game.prototype.pushScore = function (turnScore) { debugger;
+Game.prototype.pushTurnScore = function (turnScore, player1, player2) {
   if (this.turn === true) {
-    this.score.push(turnScore);
+    player1.playerTurnScore += turnScore;
   } else {
-    this.score.push(turnScore);
+    player2.playerTurnScore += turnScore;
+  }
+}
+
+Game.prototype.pushScore = function (player1, player2) {
+  if (this.turn === true) {
+    player1.score += player1.playerTurnScore;
+  }
+   if (this.turn === false) {
+    player2.score += player2.playerTurnScore;
   }
 }
 $(function() {
@@ -45,9 +56,6 @@ $(function() {
     $("form#entry").hide();
     $("#game").show();
 
-    // make score variable
-    var turnScore = 0;
-
     // grab inputs from form
     var player1name = $("#player1name").val();
     var player2name = $("#player2name").val();
@@ -56,9 +64,9 @@ $(function() {
 
     // make objects
     var die = new Dice(diceType);
-    var player1 = new Player(player1name, 0, true)
-    var player2 = new Player(player2name, 0, false)
-    var newGame = new Game(true, playTo);
+    var player1 = new Player(player1name, 0, 0)
+    var player2 = new Player(player2name, 0, 0)
+    var newGame = new Game(true, playTo, 0);
 
     // displays
     $("#playToDisplay").text(playTo);
@@ -73,23 +81,32 @@ $(function() {
       var result = die.roll();
         if (result === 1) {
           alert("You rolled a 1.")
-          turnScore = 0;
+          result = 0;
+          newGame.pushTurnScore(result, player1, player2);
           newGame.passTurn();
-          alert(newGame.turn);
+          console.log(newGame.turn);
+          $("#player1scoreDisplay").text(player1.score);
+          $("#player2scoreDisplay").text(player2.score);
         } else {
-          turnScore += result;
+          newGame.pushTurnScore(result, player1, player2);
         }
-      $("#turnscore-display").text(turnScore);
+      if (newGame.turn === true) {
+        $("#turnscore-display").text(player1.playerTurnScore);
+      } else {
+        $("#turnscore-display").text(player2.playerTurnScore);
+      }
       $("#result-display").text(result);
     });
 
     //hold button
-    $("#holdButton").click(function(event) {
+    $("#holdButton").click(function(event) { debugger;
+      console.log(newGame.turn);
+      newGame.pushScore(player1, player2);
+      $("#player1scoreDisplay").text(player1.score);
+      $("#player2scoreDisplay").text(player2.score);
+      player1.playerTurnScore = 0;
+      player2.playerTurnScore = 0;
       newGame.passTurn();
-      alert(newGame.turn);
-      newGame.pushScore();
-      alert(player1.score);
-      alert(player2.score);
     });
   });
 
