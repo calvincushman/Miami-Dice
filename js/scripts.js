@@ -99,16 +99,26 @@ $(function() {
     });
 
     //hold button
-    $("#holdButton").click(function(event) { debugger;
+    $("#holdButton").click(function(event) {
       console.log(newGame.turn);
       newGame.pushScore(player1, player2);
       $("#player1scoreDisplay").text(player1.score);
       $("#player2scoreDisplay").text(player2.score);
       player1.playerTurnScore = 0;
       player2.playerTurnScore = 0;
+      $("#turnscore-display").text("0");
       newGame.passTurn();
+
+      // win conditions
+      if (player1.score >= newGame.playTo) {
+        alert("Congrats. " + player1name + " wins!!");
+        location.reload();
+      }
+
+      if (player2.score >= newGame.playTo) {
+        alert("Congrats. " + player2name + " wins!!");
+        location.reload();
+      }
     });
   });
-
-
 });
