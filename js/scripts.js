@@ -72,6 +72,8 @@ $(function() {
     $("#playToDisplay").text(playTo);
     $("#player1nameDisplay").text(player1name);
     $("#player2nameDisplay").text(player2name);
+    $("#currentPlayer").text(player1.name);
+
 
     // add image to result display
     $(".result-div").prepend("<img src='img/" + diceType + ".png'>");
@@ -84,7 +86,11 @@ $(function() {
           result = 0;
           newGame.pushTurnScore(result, player1, player2);
           newGame.passTurn();
-          console.log(newGame.turn);
+          if (newGame.turn === true){
+            $("#currentPlayer").text(player1.name);
+          } else {
+            $("#currentPlayer").text(player2.name);
+          }
           $("#player1scoreDisplay").text(player1.score);
           $("#player2scoreDisplay").text(player2.score);
         } else {
@@ -108,6 +114,11 @@ $(function() {
       player2.playerTurnScore = 0;
       $("#turnscore-display").text("0");
       newGame.passTurn();
+      if (newGame.turn === true){
+        $("#currentPlayer").text(player1.name);
+      } else {
+        $("#currentPlayer").text(player2.name);
+      }
 
       // win conditions
       if (player1.score >= newGame.playTo) {
