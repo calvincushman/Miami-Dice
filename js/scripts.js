@@ -76,14 +76,15 @@ $(function() {
 
 
     // add image to result display
-    $(".result-div").prepend("<img src='img/" + diceType + ".png'>");
+    $(".result-div").prepend("<img id='athing' src='img/" + diceType + ".png'>");
 
     // roll button
     $("#rollButton").click(function(event) {
+      $("#athing").effect("bounce", {times: 12}, 1000);
       var result = die.roll();
         if (result === 1) {
-          alert("You rolled a 1.")
-          result = 0;
+          player1.playerTurnScore = 0;
+          player2.playerTurnScore = 0;
           newGame.pushTurnScore(result, player1, player2);
           newGame.passTurn();
           if (newGame.turn === true){
@@ -113,6 +114,7 @@ $(function() {
       player1.playerTurnScore = 0;
       player2.playerTurnScore = 0;
       $("#turnscore-display").text("0");
+      $("#result-display").text("0");
       newGame.passTurn();
       if (newGame.turn === true){
         $("#currentPlayer").text(player1.name);
