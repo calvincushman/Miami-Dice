@@ -35,9 +35,9 @@ body {
    border: solid white;
    box-shadow: 0 0 150px #ef9e09;
    font-family: Outrun future;
-   width: 350px;
+   width: 500px;
    padding: 6px;
-   font-size: 25px;
+   font-size: 35px;
  }
  h4 {
    color: #18f2d8;
@@ -45,9 +45,9 @@ body {
    border: solid white;
    box-shadow: 0 0 150px #ef9e09;
    font-family: Outrun future;
-   width: 175px;
+   width: 250px;
    padding: 6px;
-   font-size: 20px;
+   font-size: 30px;
  }
 
 p {
