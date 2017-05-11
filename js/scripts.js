@@ -17,18 +17,7 @@ Dice.prototype.roll = function (result) {
   return result;
 };
 
-// Dice.prototype.turnscoreCalc = function () {
-// this.turnscore = turnscore;
-//   if (result !== 1) {
-//     return result += this.turnscore;
-//   } else {
-//     return this.turnscore * 0;
-//   }
-// }
 
-/////////////////////////////////////////////////
-//////////    User-Interface Logic   ////////////
-/////////////////////////////////////////////////
 $(function() {
 
   $("form#entry").submit(function(event) {
@@ -36,13 +25,19 @@ $(function() {
     $("form#entry").hide();
     $("#game").show();
 
+    // make score variable
+    var turnScore = 0;
+
     // grab inputs from form
     var player1name = $("#player1name").val();
     var player2name = $("#player2name").val();
     var playTo = parseInt($("#playTo").val());
     var diceType = parseInt($("#diceType").val());
+
+    // make objects
     var die = new Dice(diceType);
 
+    // displays
     $("#playToDisplay").text(playTo);
     $("#player1nameDisplay").text(player1name);
     $("#player2nameDisplay").text(player2name);
@@ -52,6 +47,13 @@ $(function() {
 
     $("#rollButton").click(function(event) {
       var result = die.roll();
+        if (result === 1) {
+          alert("You rolled a 1.")
+          turnScore = 0;
+        } else {
+          turnScore += result;
+        }
+      $("#turnscore-display").text(turnScore);
 
       $("#result-display").text(result);
     });
