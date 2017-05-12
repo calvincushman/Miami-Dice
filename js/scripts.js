@@ -80,12 +80,19 @@ $(function() {
 
     // roll button
     $("#rollButton").click(function(event) {
+      $("#spookyDookie").fadeOut(-500000);
+      $("#athing").fadeIn(2000);
+      $("#turnscore-display").fadeIn(2000)
       $("#athing").effect("bounce", {times: 12}, 1000);
       var result = die.roll();
         if (result === 1) {
+          $("#turnscore-display").fadeOut(-50000)
+          $("#athing").fadeOut(-50000);
+          $("#spookyDookie").fadeIn(10000);
           player1.playerTurnScore = 0;
           player2.playerTurnScore = 0;
           newGame.pushTurnScore(result, player1, player2);
+
           newGame.passTurn();
           if (newGame.turn === true){
             $("#currentPlayer").text(player1.name);
